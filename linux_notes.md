@@ -1,17 +1,21 @@
 chmod cheatsheet: 644 for regular files (incl. .c), 755 for folders and scripts (incl. a.out), 600 super secret files, 700 super secret folders
 
-/ == root directory, top level, OS stuff, must sudo; ~ == home directory, personal stuff, I have full control
+/ == root directory, top level, OS stuff, must sudo
+versus
+~ == home directory, personal stuff, I have full control
 
 * only looks at folders but won't look inside sub folders or any sub-subfolders
 **/* recursively looks inside all folders and any sub/subsub/etc foldedrs
 
+CTRL+R in terminal to look through command history
+
 ZSH-SPECIFIC
-mv *(^Folder1) Folder1/
-(^blah) means to exclude that thing; this is a glob qualifier
-NOTE: (^Folder1/) doesn't work because while globbing it's matching names, not paths
 (/) == only folders; (.) plain files; (*) executables
 ls *(Lm+50) == list files larger than 50mb
 ls *(Lk-10), ls *(Lg-10) etc == less than. k=kb,g=gb
+IGNORE, I can't seem to get ^ to work: 
+mv *(^Folder1) Folder1/
+'(^blah) means to exclude that thing; this is a glob qualifier NOTE: (^Folder1/) doesn't work because while globbing it's matching names, not paths
 
 -p == create parent directories as needed
 e.g. mkdir -p folder1/folder2 == create folder1 then folder2 even if folder1 didn't exist before
@@ -46,6 +50,18 @@ troubleshooting: journalctl --system -S yyyy-mm-dd (day since, eg yesterday)
 can remove --system to see application logs, but then more to sift through
 OR: journalctl -xb -1 -e
 
+git release v1.0.0
+the numers correspond to: MAJOR.MINOR.PATCH
+patch=small bug or typo; minor=new feature; major=groundbreaking change
 
+github release workflow
+# 1. add/commit changes
+git commit -am "finalize v1.0.0" (auto adds all already-git-tracked files)
+# 2. push code
+git push
+# 3. tag version locally, optional but good practice or something
+git tag v1.0.0
+git push origin v1.0.0
+# 4. create GitHub release
 
 

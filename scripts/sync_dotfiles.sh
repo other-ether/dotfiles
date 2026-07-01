@@ -10,7 +10,7 @@ DAY=$(date +%d)
 DAY_NUM=$((10#$DAY))
 
 # Check if the day is even; I can change the math to change the update interval frequency
-if (( DAY_NUM % 2 = 0 )); thenany
+if (( DAY_NUM % 2 == 0 )); then
     
     # 1. Add all changes inside the dotfiles directory
     git -C "$REPO_DIR" add -A
@@ -19,12 +19,12 @@ if (( DAY_NUM % 2 = 0 )); thenany
     if ! git -C "$REPO_DIR" diff-index --quiet HEAD; then
         
         # Commit with a timestamp
-        git -C "$REPO_DIR" commit -m "Automated backup on startup (Odd Day): $(date)"
+        git -C "$REPO_DIR" commit -m "Automated backup on startup: $(date)"
         
         # 3. Push to GitHub
         git -C "$REPO_DIR" push origin main
     fi
 else
     # remove else block after testing
-    echo "Today is day $DAY_NUM (Even day). Skipping Git push."
+    echo "Today is day $DAY_NUM (Not even/etc day). Skipping Git push."
 fi
