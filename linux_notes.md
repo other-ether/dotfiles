@@ -1,5 +1,24 @@
 chmod cheatsheet: 644 for regular files (incl. .c), 755 for folders and scripts (incl. a.out), 600 super secret files, 700 super secret folders
 
+/ == root directory, top level, OS stuff, must sudo; ~ == home directory, personal stuff, I have full control
+
+* only looks at folders but won't look inside sub folders or any sub-subfolders
+**/* recursively looks inside all folders and any sub/subsub/etc foldedrs
+
+ZSH-SPECIFIC
+mv *(^Folder1) Folder1/
+(^blah) means to exclude that thing; this is a glob qualifier
+NOTE: (^Folder1/) doesn't work because while globbing it's matching names, not paths
+(/) == only folders; (.) plain files; (*) executables
+ls *(Lm+50) == list files larger than 50mb
+ls *(Lk-10), ls *(Lg-10) etc == less than. k=kb,g=gb
+
+-p == create parent directories as needed
+e.g. mkdir -p folder1/folder2 == create folder1 then folder2 even if folder1 didn't exist before
+-i == interactive (ask for confirmation before mv cp rm)
+yes == outputs yes continuously (useful to pipe)
+-y == say yes to all prompts (apt, rsync, etc)
+
 sudo visudo = to safely edit sudo configs
 flatpak = mostly for desktop apps I guess. more updated perhaps but could take more space
 secure boot = disabled for now. ignoring MOK.
@@ -25,7 +44,7 @@ hold power button
 
 troubleshooting: journalctl --system -S yyyy-mm-dd (day since, eg yesterday)
 can remove --system to see application logs, but then more to sift through
-
+OR: journalctl -xb -1 -e
 
 
 
