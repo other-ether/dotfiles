@@ -116,4 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-shopt -s globstar
+# I think I'm gonna mostly leave bash alone, so that bash is like a pure basic omni-compliant sandbox
+# shopt -s autocd
+# shopt -s cdspell
+# shopt -s globstar
+# shopt -s dirspell
+# shopt -s checkwinsize

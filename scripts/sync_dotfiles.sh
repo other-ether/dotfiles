@@ -6,11 +6,11 @@ REPO_DIR="$HOME/dotfiles"
 # Get the current day of the month as a number (e.g., 01, 02, 15, 31)
 DAY=$(date +%d)
 
-# Strip any leading zeros (so '09' becomes '9') to prevent arithmetic errors
+# Strip leading zeros (e.g. '09' = '9') to prevent arithmetic errors
 DAY_NUM=$((10#$DAY))
 
 # Check if the day is even; I can change the math to change the update interval frequency
-if (( DAY_NUM % 2 == 0 )); then
+if (( DAY_NUM % 2 == 1 )); then
     
     # 1. Add all changes inside the dotfiles directory
     git -C "$REPO_DIR" add -A

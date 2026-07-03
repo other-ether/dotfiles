@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# interval of once a week (can change duh)
+if [[ "$(date +%A)" == "Monday" ]]; then
+    echo "Monday again. Garfield is busy eating lasagna."
+    echo "============================================"
+    uppy
+    echo "============================================"
+    # need execzsh to keep the terminal open after using:
+    # gnome-terminal -- ~/blahblahblah
+    exec zsh
+fi

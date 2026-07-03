@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# I already have this in my ~/.profile: export PATH="$HOME/dotfiles/scripts:$PATH"
+# it's in my ~/.profile instead so it's usable outside of zsh lah
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -8,13 +11,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="alanpeabody"
+ZSH_THEME="random"
 
 # Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
+# Setting this variable when ZSH_THEME="random" will cause zsh to load
+# a theme from this variable INSTEAD OF global pool in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "alanpeabody" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "agnoster" "alanpeabody" "fino" )
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -107,27 +110,46 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# making aliases reminds me of making custom chat commands for Twitch
+
+alias theme='echo "The current theme is: $RANDOM_THEME."'
+alias whattheme=theme
+alias themereset='ZSH_THEME="robbyrussell" && source $ZSH/oh-my-zsh.sh'
+alias resettheme=themereset
+alias reload='source ~/.zshrc'
+alias help=run-help
+alias whence='whence -v'
+
 alias la='ls -lAh'
 alias lh='ls -lh'
 alias lt='ls -lt'
 alias lr='tree -C --dirsfirst'
 alias c='clear'
+
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
 alias gl='git pull'
-alias ..='cd ..'
-alias ...='cd ../..'
+
+# alias ..='cd ..'
+# alias ...='cd ../..'
+setopt AUTO_CD
 alias h='cd ~'
 alias docu='cd ~/Documents'
 alias pisc='cd ~/Documents/Coding/Piscine'
+alias downl='cd ~/Downloads'
 alias dotf='cd ~/dotfiles'
+alias notes='nano ~/dotfiles/linux_notes.md'
 alias his='history'
-alias grep='grep --color=auto'
+# alias grep='grep --color=auto'
+export GREP_COLORS='ms=01;38;5;202'
+
 alias vore='rm -rf'
 alias extr='tar -xzf'
 alias du='du -sh'
 alias df='df -h /'
+
 alias qw='setxkbmap us'
 alias cm='setxkbmap us -variant colemak_dh'
+
