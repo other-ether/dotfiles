@@ -1,4 +1,5 @@
 #!/bin/zsh
+# zsh -lc "path to this script" => cuz my SSH stuff can be obtained by my shell, but not the GUI at startup (Startup Applications)
 
 # Path to my dotfiles repo
 REPO_DIR="$HOME/dotfiles"
@@ -10,7 +11,7 @@ DAY=$(date +%d)
 DAY_NUM=$((10#$DAY))
 
 # Check if the day is even; I can change the math to change the update interval frequency
-if (( DAY_NUM % 2 == 1 )); then
+if (( DAY_NUM % 2 == 0 )); then
     
     # 1. Add all changes inside the dotfiles directory
     git -C "$REPO_DIR" add -A

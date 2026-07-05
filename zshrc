@@ -141,7 +141,8 @@ alias pisc='cd ~/Documents/Coding/Piscine'
 alias downl='cd ~/Downloads'
 alias dotf='cd ~/dotfiles'
 alias notes='nano ~/dotfiles/linux_notes.md'
-alias his='history'
+alias his=history
+alias hist=history
 # alias grep='grep --color=auto'
 export GREP_COLORS='ms=01;38;5;202'
 
