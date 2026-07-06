@@ -1,8 +1,19 @@
-#!/bin/sh
+#!/bin/bash
+# i mean i used a sh shebang originally but that only saves me a few milliseconds, which isnt worth it
+# given: having to keep track of using sh/dash features vs bash features for future changes = annoying
 
-echo "Giving the system an uppy! (updating and cleaning stuff)"
-sudo apt update &&
-sudo apt upgrade -y &&
-sudo apt autoremove -y &&
-sudo apt autoclean &&
-echo "All done! Yipee!"
+echo "Give the system an uppy! OwO (updating and cleaning stuff)"
+
+# &&chain succeeds only if every command succeeds; script exit 0/1 used in auto-uppy script
+if sudo apt update &&
+   sudo apt upgrade -y &&
+   sudo apt autoremove -y &&
+   sudo apt autoclean &&
+   flatpak update -y &&
+   flatpak uninstall --unused -y
+then
+    echo "All done! Yipee!"
+else
+    echo "Update failed somewhere... QmQ"
+    exit 1
+fi

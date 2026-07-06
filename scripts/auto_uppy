@@ -1,10 +1,22 @@
 #!/bin/bash
 
+# so that it doesn't run more than once on the same Monday
+STAMP="$HOME/.local/state/uppy-last-run"
+THIS_WEEK=$(date +%G-W%V)
+
+# for robustness (e.g. changing folder location, or computers, etc)
+mkdir -p "$(dirname "$STAMP")"
+
+# check log/state
+if [[ -f "$STAMP" ]] && [[ $(cat "$STAMP") == "$THIS_WEEK" ]]; then
+    exit 0
+fi
+
 # interval of once a week (can change duh)
 if [[ "$(date +%A)" == "Monday" ]]; then
     echo "Monday again. Garfield is busy eating lasagna."
     echo "============================================"
-    uppy
+    uppy && echo "$THIS_WEEK" > "$STAMP"
     echo "============================================"
     # need execzsh to keep the terminal open after using:
     # gnome-terminal -- ~/blahblahblah
