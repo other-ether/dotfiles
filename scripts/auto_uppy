@@ -18,7 +18,9 @@ if [[ "$(date +%A)" == "Monday" ]]; then
     echo "============================================"
     uppy && echo "$THIS_WEEK" > "$STAMP"
     echo "============================================"
-    # need execzsh to keep the terminal open after using:
-    # gnome-terminal -- ~/blahblahblah
     exec zsh
 fi
+
+# need execzsh to keep the terminal open after using:
+# gnome-terminal -- zsh -c "/home/guosh/dotfiles/scripts/auto_uppy; exec zsh"
+# the complete/redundant form^

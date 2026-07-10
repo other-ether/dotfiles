@@ -1,6 +1,7 @@
 #!/bin/bash
 # i mean i used a sh shebang originally but that only saves me a few milliseconds, which isnt worth it
 # given: having to keep track of using sh/dash features vs bash features for future changes = annoying
+# the main benefit of using sh is portability, which I don't need to worry about since this is personal use
 
 echo "Give the system an uppy! OwO (updating and cleaning stuff)"
 
