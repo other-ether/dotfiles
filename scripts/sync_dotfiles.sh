@@ -10,7 +10,7 @@ DAY=$(date +%d)
 # Strip leading zeros (e.g. '09' = '9') to prevent arithmetic errors
 DAY_NUM=$((10#$DAY))
 
-# Check if the day is even; I can change the math to change the update interval frequency
+# change math to change the update interval frequency
 if (( DAY_NUM % 2 == 0 )); then
     
     # 1. Add all changes inside the dotfiles directory
@@ -25,7 +25,3 @@ if (( DAY_NUM % 2 == 0 )); then
         # 3. Push to GitHub
         git -C "$REPO_DIR" push origin main
     fi
-else
-    # remove else block after testing
-    echo "Today is day $DAY_NUM (Not even/etc day). Skipping Git push."
-fi
