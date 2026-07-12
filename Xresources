@@ -1,5 +1,5 @@
 ! theres an issue with toolkits or display servers in linux or wtv
 ! this file is a safetyguard in case the cursor stuff in zshrc (e.g. export) didnt work
 
-Xcursor.size: 31
-Xcursor.theme: Bibta-Modern-Classic
+Xcursor.size: 38
+Xcursor.theme: Bibata-Modern-Classic

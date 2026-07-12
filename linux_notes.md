@@ -1,3 +1,4 @@
+# basic stuff
 chmod cheatsheet: 644 for regular files (incl. .c), 755 for folders and scripts (incl. a.out), 600 super secret files, 700 super secret folders
 ctrl c = cancel; ctrl d = i'm done inputting or whatever; ctrl \ = coredump forcekill
 
@@ -37,7 +38,17 @@ bash is most cross-platform compatible, zsh is more beautiful and useful
 bash arrays: 0-indexed; zsh arrays: 1-indexed?!
 zsh: can handle floats natively; word splitting is OFF by default
 e.g. folder="My Docs"; mkdir $folder; zsh creates 1 folder "My Docs" BUT bash creates 2 folders "My" "Docs"
+export and read commands are a little different too (ignore for now)(not the same read() as in C)
 
+# hist
+history is different on bash vs zsh!!!!
+show last 5 commands: 
+bash: history 5 VERSUS zsh: history -5
+on zsh, history 5 means show all commands from the 5th onwards
+could use "| head/tail -n x" to avoid doubt I guess..
+fyi: -c means byte in head/tail/wc because originally each character was one byte (pre emojis, CJK, UTF-8 etc)
+
+# misc
 -p == create parent directories as needed
 e.g. mkdir -p folder1/folder2 == create folder1 then folder2 even if folder1 didn't exist before
 -i == interactive (ask for confirmation before mv cp rm)
@@ -50,7 +61,7 @@ yes == outputs yes continuously (useful to pipe)
 - dual booting = I should log into Windows occasionally (every month? few months?) to update ASUS/BIOS/etc stuff
 - dotfiles, with the zshrc symlinked for aliases, means that I can git push/pull this repo to my github and then I can take all my aliases AND custom shell scripts with me across devices and distros etc
 - epkl works very differently on linux. not sure if i should make the jump or if i should NOT rely on the extend/shortcuts on epkl so that i have the muscle memory for my OWN layouts on moonlander.
-- omg Bottles is 5GB... ignore for now
+- omg Bottles is 5GB... ignore for now. Lutris is also 5GB; similar but more gaming-focused (BUT includes playstation nintendo etc simulators, hence bg size). 
 - shell scripts i'll add later: mkproj (arg1) (that creates a folder called arg1, with a readme.md, a gitignore, a Makefile)
 
 # WHEN LINUX HANGS
@@ -65,6 +76,7 @@ hold power button
 # KILLING
 kill = by process ID number, pkill = by name. pkill can kill wrongly if similar name,
 so -x flag = exact match for pkill
+kill/pkill -9 flag: force kill (possible data loss or zombie child processes)
 pgrep (name) = outputs the PID, without having to sift through 'top' or 'ps aux'
 
 # WHAT IS THIS PROCESS IM LOOKING AT?
@@ -75,6 +87,7 @@ pgrep (name) = outputs the PID, without having to sift through 'top' or 'ps aux'
 1. journalctl --system -S yyyy-mm-dd (day since, eg yesterday)
 2. can remove --system to see application logs, but then more to sift through
 3. OR: journalctl -xb -1 -e
+4. need to try troubleshooting more 
 
 # git release v1.0.0
 the numers correspond to: MAJOR.MINOR.PATCH
@@ -95,4 +108,38 @@ git push origin v1.0.0
 3. sudo journalctl --vacuum-time=1d
 basically I only really need core dumps for C/C++ debugging w/ gdb
 
-#
+# things to set and forget
+Windows and Linux read time differently (bios/utc/hardware) so the next time
+I need to sync both in a dual-boot, just google Windows RealTimeIsUniversal UTC registry fix lol
+
+# Export Flatpaks and apts (future use)
+flatpak list --app --columns=application > ~/flatpak_list.txt
+apt-mark showmanual > ~/apt_list.txt
+
+# terminal redirection & flows
+< > >>: ONLY FOR STATIC FILES; |: for commands that generate text
+>> append
+<: 'cat file' looks the same as 'cat < file' but the mechanism (e.g. argv argc) is different
+< is useful for programs that DON'T accept filenames as arguments
+e.g. cat names.txt | sort
+just becomes: sort < names.txt
+2>: stderr (error messages)
+&>: stdout + stderr
+ls | wc: both ls and wc run AT THE SAME TIME beneath the surface!! it's not sequential
+tee: it's like piping (static files AND live streams) except to stdout AND to multiple files
+e.g. echo "Hi" | tee copy1 copy2 (it'll appear on stdout too)
+e.g. tee copy1 copy2 < orig
+to hide stdout from screen, add a > at the end to redirect the stdout:
+echo "Secret Data" | tee file1.txt file2.txt > /dev/null
+
+[!!] "head -n 4 jaber > jaber" doesn't work because linux doesn't read left to right,
+the shell reads the redirection operators first (so it sees >jabber first and then makes an empty file called jabber AND THEN does 'head')
+
+# history / private shell use
+1. fc -p: creates blank temp history
+2. (do stuff)
+3. fc -P: ends private session
+
+clearing command history permanently (2 ways):
+1. "> ~/.zsh_history && fc -Ri" : zsh specific, keeps temp/session vars/aliases/etc
+2. "> "$HISTFILE" && exec "$SHELL"" : universal, resets session

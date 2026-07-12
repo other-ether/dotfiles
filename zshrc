@@ -7,6 +7,8 @@
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# !! SINCE MY ALIASES ARE BELOW, my alias will override any selfsame ohmyzsh alias etc
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -17,7 +19,7 @@ ZSH_THEME="random"
 # Setting this variable when ZSH_THEME="random" will cause zsh to load
 # a theme from this variable INSTEAD OF global pool in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "agnoster" "alanpeabody" "fino" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "agnoster" "alanpeabody" "fino" "dst" "crunch" "smt")
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -115,16 +117,19 @@ source $ZSH/oh-my-zsh.sh
 alias theme='echo "The current theme is: $RANDOM_THEME."'
 alias whattheme=theme
 alias themereset='ZSH_THEME="robbyrussell" && source $ZSH/oh-my-zsh.sh'
+
 alias resettheme=themereset
 alias reload='source ~/.zshrc'
 alias help=run-help
 alias whence='whence -v'
 
 alias la='ls -lAh'
-alias lh='ls -lh'
 alias lt='ls -lt'
 alias lr='tree -C --dirsfirst'
+
 alias c='clear'
+alias bye=exit
+alias relight='sudo systemctl restart lightdm'
 
 alias gs='git status'
 alias ga='git add'
@@ -136,11 +141,14 @@ alias gl='git pull'
 # alias ...='cd ../..'
 setopt AUTO_CD
 alias h='cd ~'
+alias koko=pwd
+alias here=pwd
 alias docu='cd ~/Documents'
 alias pisc='cd ~/Documents/Coding/Piscine'
 alias downl='cd ~/Downloads'
 alias dotf='cd ~/dotfiles'
 alias notes='nano ~/dotfiles/linux_notes.md'
+alias coding='cd ~/Documents/Coding'
 alias his=history
 alias hist=history
 # alias grep='grep --color=auto'
@@ -150,7 +158,73 @@ alias vore='rm -rf'
 alias extr='tar -xzf'
 alias du='du -sh'
 alias df='df -h /'
+alias dcache='du -sh ~/.cache'
 
 alias qw='setxkbmap us'
 alias cm='setxkbmap us -variant colemak_dh'
 
+# xcursor is for x11 stuff or something. ~/.Xresources as extra layer
+export XCURSOR_SIZE=36
+alias xcursor='xrdb -merge ~/.Xresources'
+alias flatpakcursor='flatpak override --user --env=XCURSOR_SIZE=36 --env=XCURSOR_THEME="Bibata-Modern-Classic"'
+cursor() {
+    local size
+    local theme
+    size=$(gsettings get org.cinnamon.desktop.interface cursor-size)
+    theme=$(gsettings get org.cinnamon.desktop.interface cursor-theme)
+    echo "The cursor is size $size, themed $theme (Cinnamon)."
+}
+
+# teleporting
+to() {
+    # 1. Fallback check: If nothing was passed, just go home
+    if [ -z "$1" ]; then
+        cd ~
+        return
+    fi
+
+    # 2. Find the absolute, real physical path (resolves symlinks automatically)
+    local real_target=$(realpath "$1" 2>/dev/null)
+
+    # 3. If the file/folder doesn't even exist, stop here
+    if [ ! -e "$real_target" ]; then
+        echo "Error: '$1' does not exist."
+        return 1
+    fi
+
+    # 4. Teleport based on what the real target actually is
+    if [ -d "$real_target" ]; then
+        # If it's a folder (or a symlink pointing to a folder), go inside
+        cd "$real_target"
+    else
+        # If it's a file (or a symlink pointing to a file), go to the folder holding it
+        cd "$(dirname "$real_target")"
+    fi
+}
+
+alias cdf=to
+alias teleport=to
+alias iku=to
+
+# using tee to copy a file to multiple destinations
+multicp() {
+    # Check if we have at least an input file and one destination
+    if [ "$#" -lt 2 ]; then
+        echo "Usage: multicp <source_file> <dest1> [dest2] [dest3] ..."
+        return 1
+    fi
+
+    # Extract the first argument as the source file
+    local src="$1"
+    shift # Remove the first argument, leaving only the destinations
+
+    # check if  source file actually exists
+    if [ ! -f "$src" ]; then
+        echo "Error: Source file '$src' does not exist."
+        return 1
+    fi
+
+    # suppress stdout
+    tee "$@" < "$src" > /dev/null
+}
+alias multcp=multicp
