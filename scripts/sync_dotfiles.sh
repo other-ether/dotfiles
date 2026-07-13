@@ -1,15 +1,8 @@
 #!/bin/zsh
 # zsh -lc "path to this script" => cuz my SSH stuff can be obtained by my shell, but not the GUI at startup (Startup Applications)
 
-# --- DEBUG BLOCK ---
-DEBUG_LOG="$HOME/desktop_startup_debug.log"
-echo "--- Script triggered on: $(date) ---" >> "$DEBUG_LOG"
-if [[ -f "$HOME/.local/state/sync_dotfiles.log" ]]; then
-    echo "Current stamp file contents: $(cat $HOME/.local/state/sync_dotfiles.log)" >> "$DEBUG_LOG"
-else
-    echo "Stamp file does not exist yet." >> "$DEBUG_LOG"
-fi
-# --------------------------------------------------
+# more debugging
+echo "--- Script woke up at: $(date '+%F %T') ---" >> "$HOME/startup_test.log"
 
 # so that it doesn't run more than once on the same day
 STAMP="$HOME/.local/state/sync_dotfiles.log"
