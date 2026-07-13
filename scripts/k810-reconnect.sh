@@ -3,7 +3,7 @@ MAC="00:1F:20:92:15:08"
 
 while true
 do
-  sleep 2
+  sleep 1
   CONNECTED=$(bluetoothctl info $MAC | grep "Connected: yes")
   
   if [ -z "$CONNECTED" ]; then

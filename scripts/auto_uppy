@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # so that it doesn't run more than once on the same Monday
-STAMP="$HOME/.local/state/uppy-last-run"
+STAMP="$HOME/.local/state/auto_uppy.log"
 THIS_WEEK=$(date +%G-W%V)
 
 # for robustness (e.g. changing folder location, or computers, etc)
@@ -15,9 +15,9 @@ fi
 # interval of once a week (can change duh)
 if [[ "$(date +%A)" == "Monday" ]]; then
     echo "Monday again. Garfield is busy eating lasagna."
-    echo "============================================"
+    echo "=============================================="
     uppy && echo "$THIS_WEEK" > "$STAMP"
-    echo "============================================"
+    echo "=============================================="
     exec zsh
 fi
 
