@@ -205,7 +205,9 @@ to() {
 alias cdf=to
 alias teleport=to
 alias iku=to
+alias gogo=to
 
+# NEED TO DEBUG/TEST THIS NEXT ONE
 # using tee to copy a file to multiple destinations
 multicp() {
     # Check if we have at least an input file and one destination

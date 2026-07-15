@@ -1,9 +1,6 @@
 #!/bin/zsh
 # zsh -lc "path to this script" => cuz my SSH stuff can be obtained by my shell, but not the GUI at startup (Startup Applications)
 
-# more debugging
-echo "--- Script woke up at: $(date '+%F %T') ---" >> "$HOME/startup_test.log"
-
 # so that it doesn't run more than once on the same day
 STAMP="$HOME/.local/state/sync_dotfiles.log"
 THIS_DAY=$(date +%F)
@@ -34,7 +31,7 @@ DAY=$(date +%d)
 DAY_NUM=$((10#$DAY))
 
 # change math to change the update interval frequency
-if (( DAY_NUM % 1 == 0 )); then
+if (( DAY_NUM % 2 == 0 )); then
 
     git -C "$REPO_DIR" add -A
 

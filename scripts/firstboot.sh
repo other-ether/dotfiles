@@ -8,7 +8,7 @@ sudo apt update
 
 # things I'll usually want or use (NOT every single apt I currently have)
 # stuff like OBS or Steam might depend on the package manager of the distro, idk if Id want the apt necessarily, so I'm omitting them
-sudo apt install -y finger zsh zsh-autosuggestions zsh-syntax-highlighting git curl vlc 
+sudo apt install -y finger zsh zsh-autosuggestions zsh-syntax-highlighting git curl vlc zram-config
 
 # install ohmyzsh and switch to zsh
 sh -c "$(curl -fsSL https://githubusercontent.com)" "" --unattended && chsh -s $(which zsh)

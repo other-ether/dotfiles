@@ -13,7 +13,7 @@ if sudo apt update &&
    flatpak update -y &&
    flatpak uninstall --unused -y
 then
-    echo "All done! Yipee!"
+    echo "All done! Yipee! UwU"
 else
     echo "Update failed somewhere... QmQ"
     exit 1
