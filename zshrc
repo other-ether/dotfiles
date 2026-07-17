@@ -130,6 +130,7 @@ alias lr='tree -C --dirsfirst'
 alias c='clear'
 alias bye=exit
 alias relight='sudo systemctl restart lightdm'
+alias recinnamon='pkill -HUP -f "cinnamon --replace"'
 
 alias gs='git status'
 alias ga='git add'
