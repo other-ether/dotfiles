@@ -7,6 +7,6 @@ do
   CONNECTED=$(bluetoothctl info $MAC | grep "Connected: yes")
   
   if [ -z "$CONNECTED" ]; then
-    bluetoothctl connect $MAC &> /dev/null
+    bluetoothctl connect $MAC &> /dev/null &
   fi
 done

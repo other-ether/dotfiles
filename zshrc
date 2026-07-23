@@ -164,6 +164,11 @@ alias dcache='du -sh ~/.cache'
 alias qw='setxkbmap us'
 alias cm='setxkbmap us -variant colemak_dh'
 
+alias btconf='sudo nano /etc/bluetooth/main.conf'
+alias bluetoothconfig=btconf
+alias bluetoothsetting=btconf
+alias btsetting=btconf
+
 # xcursor is for x11 stuff or something. ~/.Xresources as extra layer
 export XCURSOR_SIZE=36
 alias xcursor='xrdb -merge ~/.Xresources'

@@ -63,6 +63,7 @@ yes == outputs yes continuously (useful to pipe)
 - epkl works very differently on linux. not sure if i should make the jump or if i should NOT rely on the extend/shortcuts on epkl so that i have the muscle memory for my OWN layouts on moonlander.
 - omg Bottles is 5GB... ignore for now. Lutris is also 5GB; similar but more gaming-focused (BUT includes playstation nintendo etc simulators, hence bg size). 
 - shell scripts i'll add later: mkproj (arg1) (that creates a folder called arg1, with a readme.md, a gitignore, a Makefile)
+- OBS i'm using apt because I don't care for the latest OBS version (which'll be in flatpak) AND flatpak would require more meddling with plugin support, granting permission to files on a thumbdrive etc
 
 # WHEN LINUX HANGS
 ctrl alt F3 = enter text console,
